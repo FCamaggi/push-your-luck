@@ -10,12 +10,12 @@ const GameButton = ({ score, onAddPoint, onFinish }) => {
   const handleClick = (e) => {
     // Prevenir doble disparo
     if (isProcessing) return;
-    
+
     setIsProcessing(true);
-    
+
     // Inicializar audio en el primer click
     gameAudio.init();
-    
+
     // Efecto de presión
     setIsPressed(true);
     setTimeout(() => setIsPressed(false), 150);
@@ -28,7 +28,7 @@ const GameButton = ({ score, onAddPoint, onFinish }) => {
 
     // Ejecutar lógica del juego
     onAddPoint();
-    
+
     // Permitir nuevo click después de un breve delay
     setTimeout(() => setIsProcessing(false), 200);
   };
@@ -36,16 +36,16 @@ const GameButton = ({ score, onAddPoint, onFinish }) => {
   const createParticles = () => {
     const newParticles = [];
     const particleCount = 8;
-    
+
     for (let i = 0; i < particleCount; i++) {
       newParticles.push({
         id: Date.now() + i,
         angle: (360 / particleCount) * i,
       });
     }
-    
+
     setParticles(newParticles);
-    
+
     // Limpiar partículas después de la animación
     setTimeout(() => setParticles([]), 600);
   };
@@ -67,8 +67,8 @@ const GameButton = ({ score, onAddPoint, onFinish }) => {
       </div>
 
       <div className="probability-bar">
-        <div 
-          className="probability-fill" 
+        <div
+          className="probability-fill"
           style={{ width: `${bustProbability}%` }}
         />
         <span className="probability-text">
@@ -78,8 +78,10 @@ const GameButton = ({ score, onAddPoint, onFinish }) => {
 
       <div className="button-container">
         <div className="main-button-wrapper">
-          <button 
-            className={`btn-round ${isPressed ? 'pressed' : ''} ${score > 50 ? 'danger-zone' : ''}`}
+          <button
+            className={`btn-round ${isPressed ? 'pressed' : ''} ${
+              score > 50 ? 'danger-zone' : ''
+            }`}
             onClick={handleClick}
             onMouseEnter={handleHover}
             onTouchStart={handleTouchStart}
@@ -89,10 +91,10 @@ const GameButton = ({ score, onAddPoint, onFinish }) => {
               <span className="btn-icon">🎲</span>
             </span>
           </button>
-          
+
           {/* Partículas */}
           <div className="particle-container">
-            {particles.map(particle => (
+            {particles.map((particle) => (
               <div
                 key={particle.id}
                 className="particle"
@@ -103,9 +105,9 @@ const GameButton = ({ score, onAddPoint, onFinish }) => {
             ))}
           </div>
         </div>
-        
+
         {score > 0 && (
-          <button 
+          <button
             className="btn btn-secondary"
             onClick={onFinish}
             onMouseEnter={handleHover}

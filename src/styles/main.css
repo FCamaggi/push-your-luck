@@ -638,7 +638,7 @@ body {
   .app-subtitle {
     font-size: 1rem;
   }
-  
+
   .score-number {
     font-size: 4.5rem;
   }
@@ -669,22 +669,25 @@ body {
     min-height: 180px;
     margin: 1.5rem 0;
   }
-  
-  .result-title, .bust-title {
+
+  .result-title,
+  .bust-title {
     font-size: 2.5rem;
   }
-  
+
   .score-value {
     font-size: 3.5rem;
   }
-  
+
   .btn {
     font-size: 1.1rem;
     padding: 1rem 1.5rem;
     border-radius: 12px;
   }
-  
-  .game-screen, .result-screen, .bust-screen {
+
+  .game-screen,
+  .result-screen,
+  .bust-screen {
     padding: 2rem 1.2rem;
     border-radius: 15px;
   }
@@ -746,11 +749,14 @@ body {
     margin: 1rem 0;
   }
 
-  .game-screen, .result-screen, .bust-screen {
+  .game-screen,
+  .result-screen,
+  .bust-screen {
     padding: 1.5rem 1rem;
   }
 
-  .result-title, .bust-title {
+  .result-title,
+  .bust-title {
     font-size: 2rem;
   }
 
@@ -782,7 +788,8 @@ body {
   }
 
   /* Permitir selección solo en inputs si los hubiera */
-  input, textarea {
+  input,
+  textarea {
     -webkit-user-select: text;
     user-select: text;
   }

@@ -15,7 +15,7 @@ function App() {
 
   const handleAddPoint = () => {
     const newScore = score + 1;
-    
+
     // Verificar si ocurre bust ANTES de actualizar el score
     if (checkBust(newScore)) {
       setScore(newScore);
@@ -43,7 +43,7 @@ function App() {
 
       <main className="app-main">
         {gameState === 'playing' && (
-          <GameButton 
+          <GameButton
             score={score}
             onAddPoint={handleAddPoint}
             onFinish={handleFinish}
@@ -51,17 +51,11 @@ function App() {
         )}
 
         {gameState === 'finished' && (
-          <ResultScreen 
-            score={score}
-            onRestart={handleRestart}
-          />
+          <ResultScreen score={score} onRestart={handleRestart} />
         )}
 
         {gameState === 'bust' && (
-          <BustScreen 
-            score={score}
-            onRestart={handleRestart}
-          />
+          <BustScreen score={score} onRestart={handleRestart} />
         )}
       </main>
 

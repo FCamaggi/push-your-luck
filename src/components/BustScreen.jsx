@@ -13,7 +13,7 @@ const BustScreen = ({ score, onRestart }) => {
         <div className="bust-icon">💀</div>
         <h1 className="bust-title">¡BUST!</h1>
         <p className="bust-message">Tu ambición fue demasiado...</p>
-        
+
         <div className="lost-score">
           <p className="lost-label">Perdiste</p>
           <p className="lost-value">{score} puntos</p>
@@ -23,10 +23,7 @@ const BustScreen = ({ score, onRestart }) => {
           <p>"La avaricia rompe el saco"</p>
         </div>
 
-        <button 
-          className="btn btn-restart"
-          onClick={onRestart}
-        >
+        <button className="btn btn-restart" onClick={onRestart}>
           🔄 Intentar de Nuevo
         </button>
       </div>

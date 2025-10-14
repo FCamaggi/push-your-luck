@@ -110,6 +110,7 @@ Modifica la función `checkBust` en `src/App.jsx` para cambiar la lógica de pro
 ## 🏆 Competencia
 
 En el contexto del evento de cumpleaños:
+
 - Cada jugador captura su mejor puntuación
 - El puntaje más alto gana **15 puntos para su equipo**
 - La evidencia es la imagen capturada con el botón "Compartir"

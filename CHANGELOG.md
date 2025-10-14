@@ -3,6 +3,7 @@
 ## Versión 2.0 - Optimización Móvil y Mejoras Visuales
 
 ### 🎨 Nuevo Diseño del Botón
+
 - ✅ Botón redondo tipo "clásico" con efecto 3D realista
 - ✅ Animación de presión cuando se hace clic
 - ✅ Efecto de partículas que explotan en cada clic
@@ -10,6 +11,7 @@
 - ✅ Tamaño: 180px en desktop, 160px en móvil, 140px en pantallas pequeñas
 
 ### 🎵 Sistema de Audio
+
 - ✅ Web Audio API para generar sonidos sintéticos
 - ✅ Pitch progresivo: el sonido se vuelve más agudo conforme subes puntos
 - ✅ Sonido de victoria: acorde mayor ascendente alegre
@@ -17,12 +19,14 @@
 - ✅ Sonido de hover sutil para feedback
 
 ### 📸 Captura de Pantalla Mejorada
+
 - ✅ Los botones "Compartir" y "Jugar de Nuevo" están FUERA del área de captura
 - ✅ Solo se captura: título, mensaje y badge de puntuación
 - ✅ Alta resolución (scale: 3) para mejor calidad en móviles
 - ✅ Padding adicional en la imagen
 
 ### 📱 Optimización Móvil
+
 - ✅ Responsive design con 3 breakpoints:
   - Desktop: >768px
   - Tablet/Móvil: 480-768px
@@ -35,6 +39,7 @@
 - ✅ Botones y elementos con tamaños touch-friendly
 
 ### ✨ Efectos Visuales
+
 - ✅ Animación de brillo (glow-pulse) en el número de puntos
 - ✅ Efecto de brillo deslizante en la barra de probabilidad
 - ✅ Animación rainbow en el título de victoria
@@ -42,6 +47,7 @@
 - ✅ Partículas con explosión radial de 8 direcciones
 
 ### 🎯 Mejoras de UX
+
 - ✅ Feedback visual inmediato al hacer clic
 - ✅ Feedback auditivo con pitch progresivo
 - ✅ Zona de peligro visual cuando >50 puntos
