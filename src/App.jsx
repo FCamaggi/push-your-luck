@@ -16,9 +16,8 @@ function App() {
   const handleAddPoint = () => {
     const newScore = score + 1;
 
-    // Verificar si ocurre bust ANTES de actualizar el score
+    // Verificar si ocurre bust - NO actualizamos el score, perdió con el puntaje anterior
     if (checkBust(newScore)) {
-      setScore(newScore);
       setGameState('bust');
     } else {
       setScore(newScore);
