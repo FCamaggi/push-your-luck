@@ -1,19 +1,29 @@
-import React, { useEffect } from 'react';
-import { captureScreenshot } from '../utils/screenshot';
+import React, { useEffect, useState } from 'react';
 import { gameAudio } from '../utils/audio';
+import { api } from '../utils/api';
 
-const ResultScreen = ({ score, onRestart }) => {
+const ResultScreen = ({ score, playerName, team, onRestart }) => {
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [message, setMessage] = useState('');
+
   useEffect(() => {
     // Reproducir sonido de victoria al mostrar la pantalla
     gameAudio.playVictorySound();
   }, []);
 
-  const handleShare = async () => {
+  const handleSendScore = async () => {
+    setSending(true);
     try {
-      await captureScreenshot('result-screen');
+      const result = await api.saveScore(playerName, team, score);
+      setSent(true);
+      setMessage(result.message);
+      gameAudio.playVictorySound();
     } catch (error) {
-      console.error('Error al capturar screenshot:', error);
-      alert('Hubo un error al capturar la imagen. Intenta de nuevo.');
+      console.error('Error al enviar puntaje:', error);
+      setMessage('Error al enviar el puntaje. Intenta de nuevo.');
+    } finally {
+      setSending(false);
     }
   };
 
@@ -41,9 +51,19 @@ const ResultScreen = ({ score, onRestart }) => {
 
       {/* Botones fuera del área de captura */}
       <div className="result-actions">
-        <button className="btn btn-share" onClick={handleShare}>
-          📸 Compartir mi Puntuación
-        </button>
+        {!sent ? (
+          <button 
+            className="btn btn-share" 
+            onClick={handleSendScore}
+            disabled={sending}
+          >
+            {sending ? '� Enviando...' : '📤 Enviar Puntuación'}
+          </button>
+        ) : (
+          <div className="sent-message">
+            ✅ {message}
+          </div>
+        )}
 
         <button className="btn btn-secondary" onClick={onRestart}>
           🔄 Jugar de Nuevo

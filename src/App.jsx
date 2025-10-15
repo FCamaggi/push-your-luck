@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import PlayerSelection from './components/PlayerSelection';
 import GameButton from './components/GameButton';
 import ResultScreen from './components/ResultScreen';
 import BustScreen from './components/BustScreen';
+import Ranking from './components/Ranking';
 import './styles/main.css';
 
 function App() {
+  const [player, setPlayer] = useState(null); // { playerName, team }
   const [score, setScore] = useState(0);
-  const [gameState, setGameState] = useState('playing'); // 'playing', 'finished', 'bust'
+  const [gameState, setGameState] = useState('selection'); // 'selection', 'playing', 'finished', 'bust'
 
   const checkBust = (currentScore) => {
     const random = Math.random() * 100;
@@ -28,35 +31,74 @@ function App() {
     setGameState('finished');
   };
 
+  const handlePlayerSelected = (playerData) => {
+    setPlayer(playerData);
+    setGameState('playing');
+  };
+
   const handleRestart = () => {
     setScore(0);
     setGameState('playing');
   };
 
+  const handleTimeout = () => {
+    // Auto-enviar cuando se acaba el tiempo
+    handleFinish();
+  };
+
+  // Mostrar pantalla de selección si no hay jugador
+  if (gameState === 'selection') {
+    return (
+      <div className="app">
+        <PlayerSelection onPlayerSelected={handlePlayerSelected} />
+      </div>
+    );
+  }
+
   return (
     <div className="app">
       <header className="app-header">
         <h1 className="app-title">🎯 Push Your Luck!</h1>
-        <p className="app-subtitle">¿Hasta dónde te atreves a llegar?</p>
+        <div className="player-info">
+          <span className={`player-team team-${player.team.toLowerCase()}`}>
+            {player.team}
+          </span>
+          <span className="player-name">{player.playerName}</span>
+        </div>
       </header>
 
-      <main className="app-main">
-        {gameState === 'playing' && (
-          <GameButton
-            score={score}
-            onAddPoint={handleAddPoint}
-            onFinish={handleFinish}
-          />
-        )}
+      <div className="app-container">
+        <aside className="app-sidebar">
+          <Ranking currentPlayer={player.playerName} />
+        </aside>
 
-        {gameState === 'finished' && (
-          <ResultScreen score={score} onRestart={handleRestart} />
-        )}
+        <main className="app-main">
+          {gameState === 'playing' && (
+            <GameButton 
+              score={score}
+              onAddPoint={handleAddPoint}
+              onFinish={handleFinish}
+              onTimeout={handleTimeout}
+            />
+          )}
 
-        {gameState === 'bust' && (
-          <BustScreen score={score} onRestart={handleRestart} />
-        )}
-      </main>
+          {gameState === 'finished' && (
+            <ResultScreen 
+              score={score}
+              playerName={player.playerName}
+              team={player.team}
+              onRestart={handleRestart}
+            />
+          )}
+
+          {gameState === 'bust' && (
+            <BustScreen 
+              score={score}
+              onRestart={handleRestart}
+            />
+          )}
+        </main>
+      </div>
 
       <footer className="app-footer">
         <p>Desarrollado con ❤️ para el juego de alianzas</p>

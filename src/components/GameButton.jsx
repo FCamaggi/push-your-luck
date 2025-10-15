@@ -1,19 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { gameAudio } from '../utils/audio';
 
-const GameButton = ({ score, onAddPoint, onFinish }) => {
+const GameButton = ({ score, onAddPoint, onFinish, onTimeout }) => {
   const [isPressed, setIsPressed] = useState(false);
   const [particles, setParticles] = useState([]);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(60);
+  const timerRef = useRef(null);
   const bustProbability = score;
+
+  // Iniciar/reiniciar timer
+  useEffect(() => {
+    startTimer();
+    return () => clearTimer();
+  }, [score]); // Se reinicia cada vez que cambia el score
+
+  const startTimer = () => {
+    clearTimer();
+    setTimeLeft(60);
+    
+    timerRef.current = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearTimer();
+          onTimeout(); // Auto-enviar cuando se acaba el tiempo
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  };
+
+  const clearTimer = () => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+  };
 
   const handleClick = (e) => {
     // Prevenir doble disparo
     if (isProcessing) return;
-
-    setIsProcessing(true);
-
-    // Inicializar audio en el primer click
+    
+    setIsProcessing(true);    // Inicializar audio en el primer click
     gameAudio.init();
 
     // Efecto de presión
@@ -61,6 +90,13 @@ const GameButton = ({ score, onAddPoint, onFinish }) => {
 
   return (
     <div className="game-screen">
+      <div className="timer-display">
+        <div className={`timer-circle ${timeLeft <= 10 ? 'timer-warning' : ''}`}>
+          <span className="timer-number">{timeLeft}</span>
+          <span className="timer-label">seg</span>
+        </div>
+      </div>
+
       <div className="score-display">
         <h1 className="score-number">{score}</h1>
         <p className="score-label">Puntos</p>
