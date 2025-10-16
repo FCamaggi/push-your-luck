@@ -75,9 +75,9 @@ app.get('/api/participants', (req, res) => {
     name,
     team: playerToTeam[name]
   }));
-  res.json({ 
+  res.json({
     participants: participantsWithTeams,
-    teams 
+    teams
   });
 });
 
@@ -96,8 +96,8 @@ app.post('/api/score', async (req, res) => {
 
   // Validar que el equipo corresponda al jugador
   if (playerToTeam[playerName] !== team) {
-    return res.status(400).json({ 
-      error: `${playerName} pertenece al equipo ${playerToTeam[playerName]}` 
+    return res.status(400).json({
+      error: `${playerName} pertenece al equipo ${playerToTeam[playerName]}`
     });
   }
 
@@ -114,13 +114,13 @@ app.post('/api/score', async (req, res) => {
         timestamp: timestamp || new Date().toISOString()
       };
       await saveScores();
-      return res.json({ 
+      return res.json({
         message: 'Puntaje actualizado (nuevo récord personal)',
         isNewRecord: true,
-        score 
+        score
       });
     } else {
-      return res.json({ 
+      return res.json({
         message: 'Puntaje no actualizado (ya tienes uno mayor)',
         isNewRecord: false,
         currentBest: scores[existingIndex].score
@@ -135,10 +135,10 @@ app.post('/api/score', async (req, res) => {
       timestamp: timestamp || new Date().toISOString()
     });
     await saveScores();
-    return res.json({ 
+    return res.json({
       message: 'Puntaje guardado',
       isNewRecord: true,
-      score 
+      score
     });
   }
 });
@@ -156,6 +156,68 @@ app.get('/api/ranking', (req, res) => {
   res.json({ ranking });
 });
 
+// Obtener todos los jugadores con sus datos completos
+app.get('/api/players/all', (req, res) => {
+  // Crear un mapa de todos los jugadores con sus puntajes
+  const allPlayersData = validParticipants.map(playerName => {
+    const playerScore = scores.find(s => s.playerName === playerName);
+    const team = playerToTeam[playerName];
+    
+    if (playerScore) {
+      return {
+        playerName,
+        team,
+        score: playerScore.score,
+        timestamp: playerScore.timestamp,
+        hasPlayed: true
+      };
+    } else {
+      return {
+        playerName,
+        team,
+        score: 0,
+        timestamp: null,
+        hasPlayed: false
+      };
+    }
+  });
+
+  // Ordenar por puntaje (mayor a menor)
+  const sortedPlayers = allPlayersData.sort((a, b) => b.score - a.score);
+
+  // Estadísticas por equipo
+  const teamStats = {
+    Rojo: {
+      totalPlayers: equipoRojo.length,
+      playedCount: sortedPlayers.filter(p => p.team === 'Rojo' && p.hasPlayed).length,
+      totalScore: sortedPlayers.filter(p => p.team === 'Rojo').reduce((sum, p) => sum + p.score, 0),
+      averageScore: 0
+    },
+    Azul: {
+      totalPlayers: equipoAzul.length,
+      playedCount: sortedPlayers.filter(p => p.team === 'Azul' && p.hasPlayed).length,
+      totalScore: sortedPlayers.filter(p => p.team === 'Azul').reduce((sum, p) => sum + p.score, 0),
+      averageScore: 0
+    }
+  };
+
+  // Calcular promedios
+  teamStats.Rojo.averageScore = teamStats.Rojo.playedCount > 0 
+    ? (teamStats.Rojo.totalScore / teamStats.Rojo.playedCount).toFixed(2) 
+    : 0;
+  teamStats.Azul.averageScore = teamStats.Azul.playedCount > 0 
+    ? (teamStats.Azul.totalScore / teamStats.Azul.playedCount).toFixed(2) 
+    : 0;
+
+  res.json({
+    totalPlayers: validParticipants.length,
+    playedCount: scores.length,
+    pendingCount: validParticipants.length - scores.length,
+    players: sortedPlayers,
+    teamStats
+  });
+});
+
 // Obtener puntaje de un jugador específico
 app.get('/api/player/:name', (req, res) => {
   const { name } = req.params;
@@ -171,7 +233,7 @@ app.get('/api/player/:name', (req, res) => {
 // Resetear todos los puntajes (solo para admin)
 app.post('/api/reset', async (req, res) => {
   const { adminKey } = req.body;
-  
+
   if (adminKey === 'reset-cumpleanos-2025') {
     scores = [];
     await saveScores();
@@ -183,17 +245,17 @@ app.post('/api/reset', async (req, res) => {
 
 // Health check
 app.get('/health', (req, res) => {
-  res.json({ 
-    status: 'ok', 
+  res.json({
+    status: 'ok',
     timestamp: new Date().toISOString(),
-    totalPlayers: scores.length 
+    totalPlayers: scores.length
   });
 });
 
 // Iniciar servidor
 async function startServer() {
   await loadScores();
-  
+
   app.listen(PORT, () => {
     console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
     console.log(`📊 Participantes válidos: ${validParticipants.length}`);
