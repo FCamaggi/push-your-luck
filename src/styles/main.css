@@ -550,6 +550,7 @@ body {
   text-align: center;
   color: var(--text-muted);
   font-size: 0.9rem;
+  position: relative;
 }
 
 /* Easter Egg Floating Trigger */
@@ -560,8 +561,10 @@ body {
   transition: all 0.3s ease;
   opacity: 0.7;
   filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
-  margin-top: 1rem;
-  text-align: center;
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+  margin: 0;
 }
 
 .easter-egg-floating:hover {
