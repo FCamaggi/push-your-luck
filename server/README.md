@@ -3,18 +3,21 @@
 ## Setup
 
 1. Crea un archivo `.env` en la carpeta `server/`:
+
 ```
 GROQ_API_KEY=tu-api-key-de-groq
 PORT=3001
 ```
 
 2. Instala dependencias:
+
 ```bash
 cd server
 npm install
 ```
 
 3. Inicia el servidor:
+
 ```bash
 npm run dev
 ```
@@ -35,6 +38,7 @@ Edita el array `validParticipants` en `server.js` con los nombres de todos los i
 ## Reset de Puntajes
 
 Para resetear todos los puntajes:
+
 ```bash
 curl -X POST http://localhost:3001/api/reset \
   -H "Content-Type: application/json" \

@@ -20,7 +20,9 @@ const PlayerSelection = ({ onPlayerSelected }) => {
       setTeams(data.teams || []);
       setLoading(false);
     } catch (err) {
-      setError('Error al cargar participantes. Verifica que el servidor esté corriendo.');
+      setError(
+        'Error al cargar participantes. Verifica que el servidor esté corriendo.'
+      );
       setLoading(false);
     }
   };
@@ -28,9 +30,9 @@ const PlayerSelection = ({ onPlayerSelected }) => {
   const handleNameChange = (name) => {
     setSelectedName(name);
     setError('');
-    
+
     // Auto-seleccionar el equipo del jugador
-    const participant = participants.find(p => p.name === name);
+    const participant = participants.find((p) => p.name === name);
     if (participant) {
       setSelectedTeam(participant.team);
     }
@@ -38,7 +40,7 @@ const PlayerSelection = ({ onPlayerSelected }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (!selectedName || !selectedTeam) {
       setError('Por favor selecciona tu nombre');
       return;
@@ -66,11 +68,7 @@ const PlayerSelection = ({ onPlayerSelected }) => {
         <h1 className="selection-title">🎯 Push Your Luck!</h1>
         <p className="selection-subtitle">Selecciona tu jugador y equipo</p>
 
-        {error && (
-          <div className="error-message">
-            {error}
-          </div>
-        )}
+        {error && <div className="error-message">{error}</div>}
 
         <form onSubmit={handleSubmit} className="selection-form">
           <div className="form-group">
@@ -82,7 +80,7 @@ const PlayerSelection = ({ onPlayerSelected }) => {
               className="form-select"
             >
               <option value="">-- Selecciona tu nombre --</option>
-              {participants.map(p => (
+              {participants.map((p) => (
                 <option key={p.name} value={p.name}>
                   {p.name} - Equipo {p.team}
                 </option>
@@ -94,7 +92,9 @@ const PlayerSelection = ({ onPlayerSelected }) => {
             <div className="form-group">
               <label>Tu Equipo</label>
               <div className="team-display">
-                <div className={`team-badge team-${selectedTeam.toLowerCase()}`}>
+                <div
+                  className={`team-badge team-${selectedTeam.toLowerCase()}`}
+                >
                   Equipo {selectedTeam}
                 </div>
               </div>

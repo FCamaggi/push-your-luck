@@ -5,6 +5,7 @@ Un juego web interactivo donde los jugadores deben acumular puntos antes de que 
 ## 🎮 Características
 
 ### Gameplay
+
 - 🎲 **Mecánica de riesgo progresivo**: Cada punto aumenta la probabilidad de bust
 - ⏱️ **Timer de 60 segundos**: Tienes 1 minuto para decidir si seguir jugando o enviar tu puntaje
 - 🎯 **Auto-envío**: Si se acaba el tiempo, tu puntaje se envía automáticamente
@@ -12,6 +13,7 @@ Un juego web interactivo donde los jugadores deben acumular puntos antes de que 
 - 🏆 **Mejor puntaje**: Solo se guarda tu récord personal más alto
 
 ### Interfaz
+
 - �📊 **Barra de riesgo visual**: Muestra en tiempo real la probabilidad de perder
 - 🔘 **Botón redondo clásico**: Diseño 3D con efecto de presión realista
 - 🎵 **Sonidos progresivos**: Audio que aumenta de pitch según tu puntuación
@@ -20,6 +22,7 @@ Un juego web interactivo donde los jugadores deben acumular puntos antes de que 
 - 📱 **Optimizado para móvil**: Perfecto para dispositivos táctiles
 
 ### Backend & Ranking
+
 - 🌐 **Servidor con persistencia**: Todos los puntajes se guardan
 - 📈 **Ranking en tiempo real**: Top 10 actualizado cada 10 segundos
 - 🔒 **Validación de jugadores**: Solo pueden jugar los participantes registrados
@@ -30,12 +33,14 @@ Un juego web interactivo donde los jugadores deben acumular puntos antes de que 
 ### Instalación Rápida
 
 **Backend:**
+
 ```bash
 cd server
 npm install
 ```
 
 **Frontend:**
+
 ```bash
 npm install
 ```
@@ -43,11 +48,13 @@ npm install
 ### Configuración
 
 1. **Servidor** - Crea `server/.env`:
+
 ```
 PORT=3001
 ```
 
 2. **Frontend** - Crea `.env`:
+
 ```
 VITE_API_URL=http://localhost:3001
 ```
@@ -57,17 +64,20 @@ VITE_API_URL=http://localhost:3001
 **Opción 1: Dos terminales**
 
 Terminal 1 (Backend):
+
 ```bash
 cd server
 npm start
 ```
 
 Terminal 2 (Frontend):
+
 ```bash
 npm run dev
 ```
 
 **Opción 2: Script único**
+
 ```bash
 npm install -g concurrently
 npm run dev  # Ejecuta ambos servidores
@@ -86,16 +96,19 @@ Ver [DEPLOY.md](DEPLOY.md) para instrucciones completas de deploy en Render.
 ## 🎯 Cómo Jugar
 
 ### 1. Selección de Jugador
+
 - Elige tu nombre de la lista
 - Tu equipo se asigna automáticamente (Rojo o Azul)
 
 ### 2. Durante el Juego
+
 - **Presiona el botón redondo** para sumar +1 punto
 - **Timer de 60 segundos**: Se reinicia con cada punto
 - **Observa la barra de riesgo** - aumenta con cada punto
 - Si el timer llega a 0, tu puntaje se envía automáticamente
 
 ### 3. Finalizar
+
 - **Opción 1**: Presiona "Finalizar Run" cuando quieras parar
 - **Opción 2**: Deja que el timer llegue a 0 (auto-envío)
 - Envía tu puntuación al servidor
@@ -106,7 +119,7 @@ Ver [DEPLOY.md](DEPLOY.md) para instrucciones completas de deploy en Render.
 - Cada punto suma +1 a tu puntuación
 - **Probabilidad de BUST = tu puntuación actual**
   - 10 puntos = 10% de probabilidad de bust
-  - 50 puntos = 50% de probabilidad de bust  
+  - 50 puntos = 50% de probabilidad de bust
   - 99 puntos = 99% de probabilidad de bust
 - Si ocurre BUST, pierdes todo y no puedes enviar ese intento
 - **Estrategia**: Decide cuándo es momento de asegurar tus puntos

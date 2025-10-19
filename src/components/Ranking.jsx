@@ -35,7 +35,7 @@ const Ranking = ({ currentPlayer }) => {
   return (
     <div className="ranking-widget">
       <h3 className="ranking-title">🏆 Top 10</h3>
-      
+
       {ranking.length === 0 ? (
         <p className="ranking-empty">Aún no hay puntajes</p>
       ) : (
@@ -43,7 +43,9 @@ const Ranking = ({ currentPlayer }) => {
           {ranking.map((entry) => (
             <div
               key={entry.playerName}
-              className={`ranking-item ${currentPlayer === entry.playerName ? 'current-player' : ''}`}
+              className={`ranking-item ${
+                currentPlayer === entry.playerName ? 'current-player' : ''
+              }`}
             >
               <span className="ranking-position">#{entry.position}</span>
               <span className={`ranking-team team-${entry.team.toLowerCase()}`}>

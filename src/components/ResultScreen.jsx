@@ -52,17 +52,15 @@ const ResultScreen = ({ score, playerName, team, onRestart }) => {
       {/* Botones fuera del área de captura */}
       <div className="result-actions">
         {!sent ? (
-          <button 
-            className="btn btn-share" 
+          <button
+            className="btn btn-share"
             onClick={handleSendScore}
             disabled={sending}
           >
             {sending ? '� Enviando...' : '📤 Enviar Puntuación'}
           </button>
         ) : (
-          <div className="sent-message">
-            ✅ {message}
-          </div>
+          <div className="sent-message">✅ {message}</div>
         )}
 
         <button className="btn btn-secondary" onClick={onRestart}>

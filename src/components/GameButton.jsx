@@ -18,7 +18,7 @@ const GameButton = ({ score, onAddPoint, onFinish, onTimeout }) => {
   const startTimer = () => {
     clearTimer();
     setTimeLeft(60);
-    
+
     timerRef.current = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
@@ -41,8 +41,8 @@ const GameButton = ({ score, onAddPoint, onFinish, onTimeout }) => {
   const handleClick = (e) => {
     // Prevenir doble disparo
     if (isProcessing) return;
-    
-    setIsProcessing(true);    // Inicializar audio en el primer click
+
+    setIsProcessing(true); // Inicializar audio en el primer click
     gameAudio.init();
 
     // Efecto de presión
@@ -91,7 +91,9 @@ const GameButton = ({ score, onAddPoint, onFinish, onTimeout }) => {
   return (
     <div className="game-screen">
       <div className="timer-display">
-        <div className={`timer-circle ${timeLeft <= 10 ? 'timer-warning' : ''}`}>
+        <div
+          className={`timer-circle ${timeLeft <= 10 ? 'timer-warning' : ''}`}
+        >
           <span className="timer-number">{timeLeft}</span>
           <span className="timer-label">seg</span>
         </div>

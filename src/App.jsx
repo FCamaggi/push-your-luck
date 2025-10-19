@@ -4,12 +4,15 @@ import GameButton from './components/GameButton';
 import ResultScreen from './components/ResultScreen';
 import BustScreen from './components/BustScreen';
 import Ranking from './components/Ranking';
+import EasterEgg from './components/EasterEgg';
 import './styles/main.css';
 
 function App() {
   const [player, setPlayer] = useState(null); // { playerName, team }
   const [score, setScore] = useState(0);
   const [gameState, setGameState] = useState('selection'); // 'selection', 'playing', 'finished', 'bust'
+  const [showEasterEgg, setShowEasterEgg] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
 
   const checkBust = (currentScore) => {
     const random = Math.random() * 100;
@@ -46,6 +49,18 @@ function App() {
     handleFinish();
   };
 
+  const handleEasterEggClick = () => {
+    setClickCount(prev => prev + 1);
+    if (clickCount + 1 >= 3) {
+      setShowEasterEgg(true);
+      setClickCount(0);
+    }
+  };
+
+  const handleCloseEasterEgg = () => {
+    setShowEasterEgg(false);
+  };
+
   // Mostrar pantalla de selección si no hay jugador
   if (gameState === 'selection') {
     return (
@@ -74,7 +89,7 @@ function App() {
 
         <main className="app-main">
           {gameState === 'playing' && (
-            <GameButton 
+            <GameButton
               score={score}
               onAddPoint={handleAddPoint}
               onFinish={handleFinish}
@@ -83,7 +98,7 @@ function App() {
           )}
 
           {gameState === 'finished' && (
-            <ResultScreen 
+            <ResultScreen
               score={score}
               playerName={player.playerName}
               team={player.team}
@@ -92,17 +107,25 @@ function App() {
           )}
 
           {gameState === 'bust' && (
-            <BustScreen 
-              score={score}
-              onRestart={handleRestart}
-            />
+            <BustScreen score={score} onRestart={handleRestart} />
           )}
         </main>
       </div>
 
       <footer className="app-footer">
-        <p>Desarrollado con ❤️ para el juego de alianzas</p>
+        <p>
+          Desarrollado con ❤️ para el juego de alianzas{' '}
+          <span 
+            className="easter-egg-trigger" 
+            onClick={handleEasterEggClick}
+            title="¿Qué será esto?"
+          >
+            🍀
+          </span>
+        </p>
       </footer>
+
+      {showEasterEgg && <EasterEgg onClose={handleCloseEasterEgg} />}
     </div>
   );
 }

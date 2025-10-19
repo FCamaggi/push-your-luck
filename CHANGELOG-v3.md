@@ -5,12 +5,14 @@
 ### 🌐 Backend con Express (Render Ready)
 
 **Nuevos Archivos:**
+
 - `server/server.js` - Servidor Express con API REST
 - `server/package.json` - Dependencias del backend
 - `server/scores.json` - Persistencia de puntajes
 - `server/.env.example` - Ejemplo de variables de entorno
 
 **Características del Backend:**
+
 - ✅ API RESTful con Express
 - ✅ Persistencia en archivo JSON
 - ✅ Validación de jugadores desde lista predefinida
@@ -21,6 +23,7 @@
 - ✅ Sin dependencias de bases de datos externas
 
 **Endpoints API:**
+
 - `GET /api/participants` - Lista de jugadores con equipos
 - `POST /api/score` - Guardar/actualizar puntaje
 - `GET /api/ranking` - Top 10 en tiempo real
@@ -110,11 +113,13 @@
 ### 📚 Documentación
 
 **Nuevos Archivos:**
+
 - `DEPLOY.md` - Guía completa para deploy en Render
 - `SETUP.md` - Instrucciones de configuración local
 - `server/README.md` - Documentación del backend
 
 **Actualizados:**
+
 - `README.md` - Nueva versión con todas las características
 - `CHANGELOG.md` - Historial de cambios
 
@@ -145,6 +150,7 @@
 ## 🌐 Deployment
 
 ### Opción 1: Local (Recomendado para el evento)
+
 - Servidor en tu computadora
 - Red WiFi local
 - Sin límites de peticiones
@@ -152,6 +158,7 @@
 - Control total
 
 ### Opción 2: Render (Cloud)
+
 - Deploy automático desde GitHub
 - HTTPS gratis
 - Servidor duerme después de 15min inactividad
@@ -171,6 +178,7 @@
 ## 🎉 ¡Listo para Jugar!
 
 El juego está completamente funcional con:
+
 - ✅ 31 jugadores registrados en 2 equipos
 - ✅ Backend funcionando
 - ✅ Frontend funcionando
