@@ -554,16 +554,14 @@ body {
 
 /* Easter Egg Floating Trigger */
 .easter-egg-floating {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  font-size: 2rem;
+  font-size: 1rem;
   cursor: pointer;
   user-select: none;
-  z-index: 1000;
   transition: all 0.3s ease;
   opacity: 0.7;
   filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+  margin-top: 1rem;
+  text-align: center;
 }
 
 .easter-egg-floating:hover {
