@@ -113,17 +113,13 @@ function App() {
       </div>
 
       <footer className="app-footer">
-        <p>
-          Desarrollado con ❤️ para el juego de alianzas{' '}
-          <span 
-            className="easter-egg-trigger" 
-            onClick={handleEasterEggClick}
-            title="¿Qué será esto?"
-          >
-            🍀
-          </span>
-        </p>
+        <p>Desarrollado con ❤️ para el juego de alianzas</p>
       </footer>
+
+      {/* Easter Egg Trigger */}
+      <div className="easter-egg-floating" onClick={handleEasterEggClick} title="¿Qué será esto?">
+        🍀
+      </div>
 
       {showEasterEgg && <EasterEgg onClose={handleCloseEasterEgg} />}
     </div>
